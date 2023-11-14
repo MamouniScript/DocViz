@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Upload Successful</h2>
+  <p>Your file has been successfully uploaded and processed.</p>
+
+  <h3>Select a Column to Display</h3>
+  <form method="post" action="{% url 'uploaded' %}">
+    {% csrf_token %}
+
+    <input type="hidden" name="selected_column_name" value="{{ selected_column_name }}">
+
+    <select name="column_name">
+      {% for column_name in column_names %}
+        <option value="{{ column_name }}">{{ column_name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Display Column</button>
+  </form>
+{% endblock %}
