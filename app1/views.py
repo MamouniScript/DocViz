@@ -21,6 +21,9 @@ def upload_file(request):
                 os.remove(instance.file.path)  
                 return redirect('uploaded')
 
+            # Stocker les données dans la session
+            request.session['column_names'] = df.columns.tolist()
+            request.session['selected_column_name'] = request.POST.get('column_name')
             column_names = df.columns.tolist()
 
 
@@ -43,4 +46,7 @@ def upload_file(request):
 
 
 def uploaded(request):
-    return render(request, 'uploaded.html')
+     # Récupérer les données depuis la session
+    column_names = request.session.get('column_names', [])
+    selected_column_name = request.session.get('selected_column_name', None)
+    return render(request, 'uploaded.html', {'column_names': column_names, 'selected_column_name': selected_column_name})
