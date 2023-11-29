@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}DoConv{% endblock %}
+
+{% block header %}Visualization{% endblock %}
+
+{% block content %}
+  <h2>Selected Visualization</h2>
+  
+  <h3>Column: {{ selected_column_name }}</h3>
+  
+  <div>
+    {% if temp_plot_path %}
+      <img src="{{ temp_plot_path }}" alt="{{ selected_column_name }} Plot">
+    {% else %}
+      <p>No visualization available. Please upload a file and select a visualization type.</p>
+    {% endif %}
+  </div>
+
+  <br>
+
+  <a href="{% url 'uploaded' %}">Back to Visualization Selection</a>
+{% endblock %}

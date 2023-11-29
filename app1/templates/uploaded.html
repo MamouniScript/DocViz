@@ -5,16 +5,17 @@
   <p>Your file has been successfully uploaded and processed.</p>
 
   <h3>Select a Column to Display</h3>
-  <form method="post" action="{% url 'uploaded' %}">
+  <form method="post" action="{% url 'display_visualization' %}" enctype="multipart/form-data">
     {% csrf_token %}
 
     <input type="hidden" name="selected_column_name" value="{{ selected_column_name }}">
 
-    <select name="column_name">
-      {% for column_name in column_names %}
-        <option value="{{ column_name }}">{{ column_name }}</option>
-      {% endfor %}
-    </select>
+    <label for="{{ form_visualization.column_name.id_for_label }}">Select a Column:</label>
+    {{ form_visualization.column_name }}
+
+    <label for="{{ form_visualization.visualization_type.id_for_label }}">Select a Visualization Type:</label>
+    {{ form_visualization.visualization_type }}
+
     <button type="submit">Display Column</button>
   </form>
 {% endblock %}
