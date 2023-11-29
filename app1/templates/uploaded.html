@@ -18,4 +18,14 @@
 
     <button type="submit">Display Column</button>
   </form>
+  {% if selected_column_name %}
+    <h2>Graph for Column: {{ selected_column_name }}</h2>
+    {% if graph_file_path %}
+        <img src="{% load static %}{% static 'graphique.png' %}" alt="Graphique de la colonne sélectionnée">
+    {% else %}
+        <p>Aucun graphique disponible.</p>
+    {% endif %}
+  {% else %}
+    <p>Aucune colonne sélectionnée.</p>
+  {% endif %}
 {% endblock %}
